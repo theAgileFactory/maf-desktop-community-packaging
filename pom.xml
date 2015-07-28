@@ -1,0 +1,181 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.agifac.maf.packaging</groupId>
+	<artifactId>maf-desktop-community-packaging</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Component "maf-desktop-community", of scope "com.agifac.maf.packaging"</name>
+	<description>This is the packaging component of BizDock community</description>
+	<packaging>pom</packaging>
+	<organization>
+		<name>The Agile Factory</name>
+		<url>http://www.the-agile-factory.com</url>
+	</organization>
+
+	<scm>
+		<connection>scm:svn:file:///var/www/svn/maf/packaging/maf-desktop-community/trunk</connection>
+		<developerConnection>scm:svn:file:///var/www/svn/maf/packaging/maf-desktop-community/trunk</developerConnection>
+		<url>scm:svn:file:///var/www/svn/maf/packaging/maf-desktop-community/trunk</url>
+	</scm>
+	
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>https://prod.the-agile-factory.net/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>releases</id>
+			<url>https://prod.the-agile-factory.net/nexus/content/repositories/releases</url>
+		</repository>
+		<site>
+			<id>site</id>
+			<name>site</name>
+			<url>scp://prod.the-agile-factory.net/var/www/html/${project.groupId}/${project.artifactId}-${project.version}</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<project.build.sourceEncoding>latin1</project.build.sourceEncoding>
+		<play.app.groupId>com.agifac.maf.desktop</play.app.groupId>
+		<play.app.artifactId>maf-desktop-app</play.app.artifactId>
+		<play.app.distSuffix>dist</play.app.distSuffix>
+		<play.app.version>6.0.1-SNAPSHOT</play.app.version>
+		<webjars.glyphicons.groupId>com.agifac.lib.webjars</webjars.glyphicons.groupId>
+		<webjars.glyphicons.artifactId>glyphicons</webjars.glyphicons.artifactId>
+		<webjars.glyphicons.version>1.0.0</webjars.glyphicons.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>${play.app.groupId}</groupId>
+			<artifactId>${play.app.artifactId}</artifactId>
+			<version>${play.app.version}</version>
+			<type>zip</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+		    <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-dependency-plugin</artifactId>
+			<version>2.8</version>
+			<executions>
+			  <execution>
+			    <id>copy-dependencies</id>         
+			    <goals>
+			      <goal>copy-dependencies</goal>
+			    </goals>
+			    <configuration>                      
+			    </configuration>
+			  </execution>
+			</executions>
+		      </plugin>
+			  
+			  
+  			<!-- Management of the enterprise dependencies -->
+  			  <plugin>
+  			    <groupId>org.apache.maven.plugins</groupId>
+  			    <artifactId>maven-antrun-plugin</artifactId>
+  			    <version>1.7</version>
+  			    <executions>
+  			      <execution>
+  				<id>repack</id>
+  				<phase>compile</phase>
+  				<goals>
+  				  <goal>run</goal>
+  				</goals>
+  				<configuration>
+  				  <target>
+  					<!-- unzip the main app -->
+  					<unzip src="${project.build.directory}/dependency/${play.app.artifactId}-${play.app.version}.zip" dest="${project.build.directory}/tmp"/>
+				    
+  					<!--WEBJARS -->
+					
+					<!--get the glyphicons webjar from www.bizdock.io -->
+                    <get src="https://www.bizdock.io/${webjars.glyphicons.artifactId}-${webjars.glyphicons.version}.jar"
+                         dest="${project.build.directory}/dependency/"
+                         verbose="false"
+                         usetimestamp="true"/>
+
+  					<!-- unzip the assets and create a lib folder -->
+  				    	<unzip src="${project.build.directory}/tmp/maf-desktop-app-dist/lib/${play.app.artifactId}.${play.app.artifactId}-dist-assets.jar" dest="${project.build.directory}/tmp2"/>
+  					<mkdir dir="${project.build.directory}/tmp2/public/lib"/>				    
+					
+  					<!-- glyphicons -->
+  					<unzip src="${project.build.directory}/dependency/${webjars.glyphicons.artifactId}-${webjars.glyphicons.version}.jar" dest="${project.build.directory}/tmp3"/>
+  				    	<move todir="${project.build.directory}/tmp2/public/lib/${webjars.glyphicons.artifactId}">
+      						<fileset dir="${project.build.directory}/tmp3/META-INF/resources/webjars/${webjars.glyphicons.artifactId}/${webjars.glyphicons.version}"/>
+    					</move>
+
+  					<!-- zip the assets -->
+  					<zip basedir="${project.build.directory}/tmp2" destfile="${project.build.directory}/tmp/maf-desktop-app-dist/lib/${play.app.artifactId}.${play.app.artifactId}-dist-assets.jar"/>
+				    
+  					<!--OTHER DEPEDENCIES (add to app + classpath) -->
+
+  				    	<!-- Example 
+  					<copy file="${project.build.directory}/dependency/${dep.artifactId}-${dep.version}.jar" tofile="${project.build.directory}/tmp/maf-desktop-app-dist/lib/${dep.artifactId}-${dep.version}.jar" />
+  				    	<replaceregexp match='declare -r app_classpath="' replace='declare -r app_classpath="$lib_dir/${dep.artifactId}-${dep.version}.jar:' flags="g" byline="true">
+  					    <fileset dir="${project.build.directory}/tmp/maf-desktop-app-dist/bin" includes="maf-desktop-app"/>
+  				    	</replaceregexp> -->
+	
+  					<!-- zip the main app -->			    
+  				    	<zip basedir="${project.build.directory}/tmp" destfile="${project.build.directory}/dependency/${play.app.artifactId}-${play.app.version}-with-dep.zip"/>
+  				  </target>
+  				</configuration>
+  			      </execution>
+  			    </executions>
+  			  </plugin>
+			  
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.5</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>process-resources</phase>
+						<configuration>
+							<outputDirectory> ${project.build.directory}/classes </outputDirectory>
+							<resources>
+								<resource>
+									<directory> ${basedir}/src/main/resources </directory>
+									<excludes>
+										<excludes>.svn</excludes>
+										<excludes>**/.svn</excludes>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<id>assembly of resources</id>
+						<phase>package</phase>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<attach>true</attach>
+							<archiveBaseDirectory> ${project.build.directory} </archiveBaseDirectory>
+							<descriptors>
+								<descriptor> src/main/assembly/resources.xml </descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
