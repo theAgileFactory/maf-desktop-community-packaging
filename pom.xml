@@ -26,11 +26,6 @@
 			<id>releases</id>
 			<url>https://prod.the-agile-factory.net/nexus/content/repositories/releases</url>
 		</repository>
-		<site>
-			<id>site</id>
-			<name>site</name>
-			<url>scp://prod.the-agile-factory.net/var/www/html/${project.groupId}/${project.artifactId}-${project.version}</url>
-		</site>
 	</distributionManagement>
 
 	<properties>
