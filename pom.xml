@@ -14,9 +14,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:file:///var/www/svn/maf/packaging/maf-desktop-community/trunk</connection>
-		<developerConnection>scm:svn:file:///var/www/svn/maf/packaging/maf-desktop-community/trunk</developerConnection>
-		<url>scm:svn:file:///var/www/svn/maf/packaging/maf-desktop-community/trunk</url>
+		<connection>scm:git:https://github.com/theAgileFactory/maf-desktop-community-packaging.git</connection>
+		<developerConnection>scm:git:https://github.com/theAgileFactory/maf-desktop-community-packaging.git</developerConnection>
+		<url>scm:git:https://github.com/theAgileFactory/maf-desktop-community-packaging.git</url>
 	</scm>
 	
 	<distributionManagement>
