@@ -58,10 +58,5 @@
 	<filtered>true</filtered>
         <fileMode>700</fileMode>
     </file>
-    <file>
-        <source>src/main/resources/META-INF/com.agifac.deploy.replacer.resources.properties</source>
-        <outputDirectory>META-INF/</outputDirectory>
-        <destName>com.agifac.deploy.replacer.resources.properties</destName>
-    </file>
   </files>
 </assembly>
