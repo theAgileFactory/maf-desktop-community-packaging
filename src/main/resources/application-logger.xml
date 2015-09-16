@@ -46,6 +46,7 @@
 	<logger name="play" level="INFO" />
 	<logger name="application" level="INFO" />
 	<logger name="logger.tools" level="INFO" />
+    <logger name="be.objectify.deadbolt.java.ExecutionContextProvider" level="ERROR" />
 	<logger name="framework.services.audit.AuditLoggerUtilities" level="INFO">
 		<appender-ref ref="FILE_AUDIT" />
 	</logger>
