@@ -3,8 +3,8 @@
 	<groupId>com.agifac.maf.packaging</groupId>
 	<artifactId>maf-desktop-community-packaging</artifactId>
 	<version>7.0.1-SNAPSHOT</version>
-	<name>Component "maf-desktop-community", of scope "com.agifac.maf.packaging"</name>
-	<description>This is the packaging component of BizDock community</description>
+	<name>BizDock community edition build component</name>
+	<description>This component is handling the build process for the BizDock community edition</description>
 	<packaging>pom</packaging>
 	<organization>
 		<name>The Agile Factory</name>
