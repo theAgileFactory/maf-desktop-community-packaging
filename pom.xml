@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.agifac.maf.packaging</groupId>
 	<artifactId>maf-desktop-community-packaging</artifactId>
-	<version>7.0.1-SNAPSHOT</version>
+	<version>8.0.0</version>
 	<name>Component "maf-desktop-community", of scope "com.agifac.maf.packaging"</name>
 	<description>This is the packaging component of BizDock community</description>
 	<packaging>pom</packaging>
