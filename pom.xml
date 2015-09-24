@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.agifac.maf.packaging</groupId>
 	<artifactId>maf-desktop-community-packaging</artifactId>
-	<version>7.0.1-SNAPSHOT</version>
+	<version>8.0.1-SNAPSHOT</version>
 	<name>BizDock community edition build component</name>
 	<description>This component is handling the build process for the BizDock community edition</description>
 	<packaging>pom</packaging>
@@ -33,7 +33,7 @@
 		<play.app.groupId>com.agifac.maf.desktop</play.app.groupId>
 		<play.app.artifactId>maf-desktop-app</play.app.artifactId>
 		<play.app.distSuffix>dist</play.app.distSuffix>
-		<play.app.version>7.0.1-SNAPSHOT</play.app.version>
+		<play.app.version>8.0.1-SNAPSHOT</play.app.version>
 		<webjars.glyphicons.groupId>com.agifac.lib.webjars</webjars.glyphicons.groupId>
 		<webjars.glyphicons.artifactId>glyphicons</webjars.glyphicons.artifactId>
 		<webjars.glyphicons.version>1.0.0</webjars.glyphicons.version>

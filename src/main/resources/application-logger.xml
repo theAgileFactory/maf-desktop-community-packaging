@@ -24,7 +24,7 @@
 			<pattern>%date - [%level] - from %logger in %thread %n%message%n%xException%n</pattern>
 		</encoder>
 	</appender>
-	
+
 	<appender name="SYSTEM_AUDIT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>../server/maf-desktop-app-dist/logs/sysadmin.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -54,7 +54,7 @@
         <appender-ref ref="SYSTEM_AUDIT" />
     </logger>
 
-  <root level="ERROR">
+  <root level="INFO">
     <appender-ref ref="STDOUT" />
     <appender-ref ref="FILE" />
   </root>
