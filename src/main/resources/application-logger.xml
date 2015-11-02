@@ -9,7 +9,7 @@
             		<fileNamePattern>../server/maf-desktop-app-dist/logs/application.%d{yyyy-MM-dd}.log</fileNamePattern>
         	</rollingPolicy>
         	<encoder>
-            		<pattern>%date - [%level] - from %logger in %thread : %message%n%date - [%level] - from %logger in %thread %xException%n</pattern>
+            		<pattern>%date - [%level] - from %logger in %thread %message%n%xException%n</pattern>
         	</encoder>
     	</appender>
 
@@ -21,7 +21,7 @@
 			<maxHistory>60</maxHistory>
 		</rollingPolicy>
 		<encoder>
-			<pattern>%date - [%level] - from %logger in %thread : %message%n%date - [%level] - from %logger in %thread %xException%n</pattern>
+			<pattern>%date - [%level] - from %logger in %thread %message%n%xException%n</pattern>
 		</encoder>
 	</appender>
 
@@ -32,13 +32,13 @@
             <maxHistory>10</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%date - [%level] - from %logger in %thread : %message%n%date - [%level] - from %logger in %thread %xException%n</pattern>
+            <pattern>%date - [%level] - from %logger in %thread %message%n%xException%n</pattern>
         </encoder>
     </appender>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>%date - [%level] - from %logger in %thread : %message%n%date - [%level] - from %logger in %thread %xException%n</pattern>
+			<pattern>%date - [%level] - from %logger in %thread %message%n%xException%n</pattern>
 		</encoder>
 	</appender>
 
