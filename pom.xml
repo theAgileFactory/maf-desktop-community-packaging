@@ -34,7 +34,7 @@
 		<play.app.groupId>com.agifac.maf.desktop</play.app.groupId>
 		<play.app.artifactId>maf-desktop-app</play.app.artifactId>
 		<play.app.distSuffix>dist</play.app.distSuffix>
-		<play.app.version>9.0.1-SNAPSHOT</play.app.version>
+		<play.app.version>10.0.0</play.app.version>
 		<webjars.glyphicons.groupId>com.agifac.lib.webjars</webjars.glyphicons.groupId>
 		<webjars.glyphicons.artifactId>glyphicons</webjars.glyphicons.artifactId>
 		<webjars.glyphicons.version>1.0.0</webjars.glyphicons.version>
