@@ -17,7 +17,7 @@
 		<url>scm:git:https://github.com/theAgileFactory/maf-desktop-community-packaging.git</url>
 	  <tag>HEAD</tag>
   </scm>
-	
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>snapshots</id>
@@ -35,9 +35,6 @@
 		<play.app.artifactId>maf-desktop-app</play.app.artifactId>
 		<play.app.distSuffix>dist</play.app.distSuffix>
 		<play.app.version>10.0.1-SNAPSHOT</play.app.version>
-		<webjars.glyphicons.groupId>com.agifac.lib.webjars</webjars.glyphicons.groupId>
-		<webjars.glyphicons.artifactId>glyphicons</webjars.glyphicons.artifactId>
-		<webjars.glyphicons.version>1.0.0</webjars.glyphicons.version>
 	</properties>
 
 	<dependencies>
@@ -53,23 +50,21 @@
 		<plugins>
 
 		    <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-dependency-plugin</artifactId>
-			<version>2.8</version>
-			<executions>
-			  <execution>
-			    <id>copy-dependencies</id>         
-			    <goals>
-			      <goal>copy-dependencies</goal>
-			    </goals>
-			    <configuration>                      
-			    </configuration>
-			  </execution>
-			</executions>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.8</version>
+						<executions>
+						  <execution>
+						    <id>copy-dependencies</id>
+						    <goals>
+						      <goal>copy-dependencies</goal>
+						    </goals>
+						    <configuration>
+						    </configuration>
+						  </execution>
+						</executions>
 		      </plugin>
-			  
-			  
-  			<!-- Management of the enterprise dependencies -->
+
   			  <plugin>
   			    <groupId>org.apache.maven.plugins</groupId>
   			    <artifactId>maven-antrun-plugin</artifactId>
@@ -85,41 +80,21 @@
   				  <target>
   					<!-- unzip the main app -->
   					<unzip src="${project.build.directory}/dependency/${play.app.artifactId}-${play.app.version}.zip" dest="${project.build.directory}/tmp" />
-				    
-  					<!--WEBJARS -->
-					
-					<!--get the glyphicons webjar from www.bizdock.io -->
-                    <get src="https://www.bizdock.io/${webjars.glyphicons.artifactId}-${webjars.glyphicons.version}.jar" dest="${project.build.directory}/dependency/" verbose="false" usetimestamp="true" />
 
   					<!-- unzip the assets and create a lib folder -->
   				    	<unzip src="${project.build.directory}/tmp/maf-desktop-app-dist/lib/${play.app.artifactId}.${play.app.artifactId}-dist-assets.jar" dest="${project.build.directory}/tmp2" />
-  					<mkdir dir="${project.build.directory}/tmp2/public/lib" />				    
-					
-  					<!-- glyphicons -->
-  					<unzip src="${project.build.directory}/dependency/${webjars.glyphicons.artifactId}-${webjars.glyphicons.version}.jar" dest="${project.build.directory}/tmp3" />
-  				    	<move todir="${project.build.directory}/tmp2/public/lib/${webjars.glyphicons.artifactId}">
-      						<fileset dir="${project.build.directory}/tmp3/META-INF/resources/webjars/${webjars.glyphicons.artifactId}/${webjars.glyphicons.version}" />
-    					</move>
+  					<mkdir dir="${project.build.directory}/tmp2/public/lib" />
 
   					<!-- zip the assets -->
   					<zip basedir="${project.build.directory}/tmp2" destfile="${project.build.directory}/tmp/maf-desktop-app-dist/lib/${play.app.artifactId}.${play.app.artifactId}-dist-assets.jar" />
-				    
-  					<!--OTHER DEPEDENCIES (add to app + classpath) -->
 
-  				    	<!-- Example 
-  					<copy file="${project.build.directory}/dependency/${dep.artifactId}-${dep.version}.jar" tofile="${project.build.directory}/tmp/maf-desktop-app-dist/lib/${dep.artifactId}-${dep.version}.jar" />
-  				    	<replaceregexp match='declare -r app_classpath="' replace='declare -r app_classpath="$lib_dir/${dep.artifactId}-${dep.version}.jar:' flags="g" byline="true">
-  					    <fileset dir="${project.build.directory}/tmp/maf-desktop-app-dist/bin" includes="maf-desktop-app" />
-  				    	</replaceregexp> -->
-	
-  					<!-- zip the main app -->			    
+  					<!-- zip the main app -->
   				    	<zip basedir="${project.build.directory}/tmp" destfile="${project.build.directory}/dependency/${play.app.artifactId}-${play.app.version}-with-dep.zip" />
   				  </target>
   				</configuration>
   			      </execution>
   			    </executions>
   			  </plugin>
-			  
 
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
