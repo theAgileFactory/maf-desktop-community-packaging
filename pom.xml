@@ -34,7 +34,7 @@
 		<play.app.groupId>com.agifac.maf.desktop</play.app.groupId>
 		<play.app.artifactId>maf-desktop-app</play.app.artifactId>
 		<play.app.distSuffix>dist</play.app.distSuffix>
-		<play.app.version>12.0.0</play.app.version>
+		<play.app.version>12.1.0</play.app.version>
 	</properties>
 
 	<dependencies>
